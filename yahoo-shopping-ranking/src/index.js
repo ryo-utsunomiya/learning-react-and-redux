@@ -15,7 +15,7 @@ ReactDOM.render(
     {/*
       Use ConnectedRouter instead of react-router-dom Router
       so that Link component works correctly
-   */}
+    */}
     <ConnectedRouter history={history}>
       <App />
     </ConnectedRouter>

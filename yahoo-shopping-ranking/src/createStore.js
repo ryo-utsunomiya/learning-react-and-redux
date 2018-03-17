@@ -1,15 +1,11 @@
-import {
-  createStore as reduxCreateStore,
-  combineReducers,
-  applyMiddleware,
-} from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import {routerReducer, routerMiddleware} from 'react-router-redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 import * as reducers from './reducers';
 
 // history is passed by src/index.js.
-export default function createStore(history) {
-  return reduxCreateStore(
+export default history =>
+  createStore(
     combineReducers({
       ...reducers,
       // reducer of react-router-redux
@@ -19,6 +15,5 @@ export default function createStore(history) {
       logger,
       // redux middleware of react-router-redux
       routerMiddleware(history),
-    )
-  )
-}
+    ),
+  );
