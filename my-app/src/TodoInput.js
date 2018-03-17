@@ -1,35 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
+import store, {inputTask, addTask} from './TasksStore';
+import newTask from "./newTask";
 
-export default class TodoInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  setTitle(title) {
-    this.setState({ title });
-  }
-
-  handleChange(e) {
-    this.setTitle(e.target.value);
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    this.props.addTodo(this.state.title);
-    this.setTitle('');
-  }
-
-  render() {
-    return (
-      <div>
-        <input placeholder="Insert new task." value={this.state.title} onChange={this.handleChange}/>
-        <button onClick={this.handleClick}>Add</button>
-      </div>
-    );
-  }
+export default () => {
+  return (
+    <div>
+      <input
+        placeholder="Insert new task."
+        onChange={e => inputTask(newTask(e.target.value))}
+      />
+      <button
+        type="button"
+        onClick={() => store.dispatch(addTask(store.getState().task))}
+      >
+        Add
+      </button>
+    </div>
+  );
 }
