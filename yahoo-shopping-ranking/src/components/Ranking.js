@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CATEGORY_ID = {
-  GENERAL: '1',
-};
-
 export default class Ranking extends React.Component {
   componentWillMount() {
     this.props.onMount(this.props.categoryId);
@@ -17,10 +13,31 @@ export default class Ranking extends React.Component {
   }
 
   render() {
+    const { category, ranking, error } = this.props;
+
     return (
       <div>
-        <h2>Ranking Component</h2>
-        <p>Category ID: {this.props.categoryId}</p>
+        <h2>{category ? `${category.name} Ranking` : ''}</h2>
+
+        {(() => {
+          if (error) {
+            return <p>Something is wrong. Please reload.</p>;
+          } else if (ranking === undefined) {
+            return <p>Loading...</p>;
+          }
+          return (
+            <ol>
+              {ranking.map(item => (
+                <li key={`ranking-item-${item.code}`}>
+                  <img alt={item.name} src={item.imageUrl} />
+                  <a href={item.url} target="_blank">
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          );
+        })()}
       </div>
     );
   }
@@ -29,7 +46,19 @@ Ranking.propTypes = {
   categoryId: PropTypes.string,
   onMount: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
+
+  category: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  ranking: PropTypes.arrayOf(PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+  })),
+  error: PropTypes.bool.isRequired,
 };
 Ranking.defaultProps = {
-  categoryId: CATEGORY_ID.GENERAL,
+  categoryId: '1',
 };
