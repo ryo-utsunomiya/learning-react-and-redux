@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import Ranking from '../components/Ranking';
 import * as actions from '../actions/Ranking';
 
