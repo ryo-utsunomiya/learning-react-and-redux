@@ -23,7 +23,7 @@ class App extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        
+
         <Nav />
 
         <Switch>
