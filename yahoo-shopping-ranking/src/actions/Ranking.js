@@ -2,9 +2,7 @@ import fetchJsonp from 'fetch-jsonp';
 import qs from 'qs';
 
 const API_URL = 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/categoryRanking';
-const APP_ID = process.env.APP_ID;
-
-console.log(APP_ID);
+const APP_ID = process.env.REACT_APP_YAHOO_APP_ID;
 
 const startRequest = categoryId => ({
   type: 'START_REQUEST',
