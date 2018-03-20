@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+} from 'material-ui';
 
 import Ranking from './containers/Ranking';
 import Nav from './containers/Nav';
@@ -8,6 +14,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <CssBaseline />
+
+        <AppBar>
+          <Toolbar>
+            <Typography type="title" color="inherit">
+              Yahoo! Shopping Ranking
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        
         <Nav />
 
         <Switch>
