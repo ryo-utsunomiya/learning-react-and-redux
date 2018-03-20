@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Card, { CardMedia, CardContent, CardActions } from 'material-ui/Card';
+import { Typography, Button } from 'material-ui';
 
 export default class Ranking extends React.Component {
   componentWillMount() {
@@ -25,18 +27,26 @@ export default class Ranking extends React.Component {
           } else if (ranking === undefined) {
             return <p>Loading...</p>;
           }
-          return (
-            <ol>
-              {ranking.map(item => (
-                <li key={`ranking-item-${item.code}`}>
-                  <img alt={item.name} src={item.imageUrl} />
-                  <a href={item.url} target="_blank">
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          );
+          return ranking.map((item, i) => (
+            <Card
+              key={`ranking-item-${item.code}`}
+              styl={{ maxWidth: '500px', margin: '32px auto' }}
+            >
+              <CardMedia
+                image={item.imageUrl}
+                title={`${i + 1}. ${item.name}`}
+                style={{ width: '500px', height: '200px', margin: '0 auto' }}
+              />
+              <CardContent>
+                <Typography type="title">{`${i + 1}. ${item.name}`}</Typography>
+              </CardContent>
+              <CardActions>
+                <Button variant="raised" color="secondary" fullWidth href={item.url}>
+                  See Detail
+                </Button>
+              </CardActions>
+            </Card>
+          ));
         })()}
       </div>
     );
