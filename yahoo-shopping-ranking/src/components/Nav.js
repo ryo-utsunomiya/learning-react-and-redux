@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import { Link } from 'react-router-dom';
 
 export default function Nav({ categories, onClick }) {
   const to = category => (category.id === '1' ? '/all' : `/category/${category.id}`);
 
   return (
-    <Drawer type="permanent">
+    <Drawer variant="permanent">
       <List style={{ width: 240 }}>
         {categories.map(category => (
           <ListItem button key={`nav-item-${category.id}`} onClick={() => onClick(to(category))}>
